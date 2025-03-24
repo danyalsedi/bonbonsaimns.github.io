@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonbonsains 🍬</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+    
+    <!-- Link para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+
+<body>
+    <header>
+        <h1>BONBONS SAINS</h1>   
+        <h1>Queremos que disfruten de productos sin azúcar ✨, ideales para personas con diabetes 🩷 y para cualquiera que quiera darse un gusto sin remordimientos. Nos inspiramos en aquellos dulces y helados que ya no se encuentran.
+            <img src="img/Bonbons sains.png" alt="Descripción de la imagen" class="small-image">
+           
+
+    </header>
+
+
+    <main>
+        <section id="dulces">
+            <h2>Elige tus productos favoritos</h2>
+            
+
+            <div class="producto">
+                <h3>Triang-late </h3>
+                <img src="img/Triang-late.jpeg" alt="Triang-late">
+                <p>Precio: $5.950 Pesos</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('Triang-late', 5.950 , 'menos')">-</button>
+                    <span id="cantidad-Triang-late">1</span>
+                    <button onclick="cambiarCantidad('Triang-late', 5.950 , 'mas')">+</button>
+                </div>
+                <button class="btn-add" onclick="addToCart('Triang-late', 5.950 )">Agregar al carrito</button>
+                <button class="btn-detalle" onclick="verDetalles('Triang-late')">Ver detalles</button>
+                <p class="detalles" id="detalles-Triang-late" style="display: none;">Características: Este helado esta hecho a base de cacao en polvo endulzado con estevia 
+                    su empaque es triangular 
+                    queriendo imitar el tringulito de chocolate de la marca de bonice</p>
+            </div>
+
+            <div class="producto">
+                <h3>Baloncito  </h3>
+                <img src="img/Baloncito.PNG" alt="Baloncito">
+                <p>Precio: $3.000 Pesos</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('Baloncito', 3.000, 'menos')">-</button>
+                    <span id="cantidad-Baloncito">1</span>
+                    <button onclick="cambiarCantidad('Baloncito', 3.000, 'mas')">+</button>
+                </div>
+                <button class="btn-add" onclick="addToCart('Baloncito', 3.000)">Agregar al carrito</button>
+                <button class="btn-detalle" onclick="verDetalles('Baloncito')">Ver detalles</button>
+                <p class="detalles" id="detalles-Baloncito" style="display: none;">Características: este helado esta hecho a base de vainilla y se endulza con stevia
+                    su envase es una pelota de futbol de plastico </p>
+            </div>
+
+            <div class="producto">
+                <h3>Lengua loca</h3>
+                <img src="img/Lengua loca text.PNG" alt="Lengua loca">
+                <p>Precio: $3.500 pesos</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('Lengua loca', 3.500, 'menos')">-</button>
+                    <span id="cantidad-Lengua-loca">1</span>
+                    <button onclick="cambiarCantidad('Lengua loca', 3.500, 'mas')">+</button>
+                </div>
+                <button class="btn-add" onclick="addToCart('Lengua loca', 3.500)">Agregar al carrito</button>
+                <button class="btn-detalle" onclick="verDetalles('Lengua loca')">Ver detalles</button>
+                <p class="detalles" id="detalles-Lengua-loca" style="display: none;">
+                    Características: Helado hecho a base de gelatina que a medida de su consumo tiene un leve movimiento por la gelatina que contiene.
+                </p>
+            </div>
+            
+
+            <div class="producto">
+                <h3>Fruti mix</h3>
+                <img src="img/Fruti mix.PNG" alt="Fruti mix">
+                <p>Precio: $3.600 Pesos</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('Fruti mix', 3.600, 'menos')">-</button>
+                    <span id="cantidad-Fruti-mix">1</span>
+                    <button onclick="cambiarCantidad('Fruti mix', 3.600, 'mas')">+</button>
+                </div>
+                <button class="btn-add" onclick="addToCart('Fruti mix', 3.600)">Agregar al carrito</button>
+                <button class="btn-detalle" onclick="verDetalles('Fruti mix')">Ver detalles</button>
+                <p class="detalles" id="detalles-Fruti-mix" style="display: none;">
+                    Características: Galletas de avena con stevia y una cubierta de mermelada y maní salado.
+                </p>
+            </div>
+            
+        </section>
+        
+    </style>
+</head>
+<body>
+  
+</head>
+<body>
+    <div id="diabetes-pregunta">
+        <h2>¿Tienes diabetes?</h2>
+        <button onclick="mostrarEncuesta(true)">Sí</button>
+        <button onclick="mostrarEncuesta(false)">No</button>
+    </div>
+    
+    <div id="encuesta" style="display: none;">
+        <h3 id="pregunta">¿Qué síntomas tienes?</h3>
+        <button class="sintoma-btn" onclick="siguienteSintoma('tipo1')">Sed excesiva</button>
+        <button class="sintoma-btn" onclick="siguienteSintoma('tipo2')">Cansancio extremo</button>
+        <button class="sintoma-btn" onclick="siguienteSintoma('gestacional')">Aumento de peso repentino</button>
+    </div>
+    
+    <div id="resultado" style="display: none;">
+        <p id="mensaje"></p>
+        <p id="recomendacion"></p>
+    </div>
+    
+    <!-- Modal para mostrar la información de cada tipo de diabetes -->
+    <div id="info-modal" class="hidden">
+        <div id="modal-content">
+            <span onclick="closeModal()">Cerrar</span>
+            <h3 id="diabetes-type"></h3>
+            <p id="diabetes-symptoms"></p>
+            <p id="product-recommendation"></p>
+        </div>
+    </div>
+    
+    <script>
+        let conteo = { tipo1: 0, tipo2: 0, gestacional: 0 };
+        let clics = 0;
+        let sintomasListas = [
+            [
+                { tipo: 'tipo1', texto: 'Pérdida de peso' },
+                { tipo: 'tipo2', texto: 'Cicatrización lenta' },
+                { tipo: 'gestacional', texto: 'Aumento del apetito' }
+            ],
+            [
+                { tipo: 'tipo1', texto: 'Mucha hambre' },
+                { tipo: 'tipo2', texto: 'Visión borrosa' },
+                { tipo: 'gestacional', texto: 'Fatiga frecuente' }
+            ],
+            [
+                { tipo: 'tipo1', texto: 'Micción frecuente' },
+                { tipo: 'tipo2', texto: 'Infecciones frecuentes' },
+                { tipo: 'gestacional', texto: 'Hinchazón en pies y manos' }
+            ]
+        ];
+        
+        function mostrarEncuesta(mostrar) {
+            if (!mostrar) {
+                // Si elige "No", mostramos los productos recomendados sin la encuesta
+                document.getElementById("resultado").style.display = "block";
+                document.getElementById("mensaje").innerText = "Te recomendamos todos los productos.";
+                document.getElementById("recomendacion").innerText = "";
+                document.getElementById("encuesta").style.display = "none";
+                document.getElementById("diabetes-pregunta").style.display = "none";
+                return;
+            }
+            
+            // Si elige "Sí", mostramos la encuesta y ocultamos la pregunta inicial
+            document.getElementById("diabetes-pregunta").style.display = "none";
+            document.getElementById("encuesta").style.display = "block";
+            document.getElementById("resultado").style.display = "none";
+            conteo = { tipo1: 0, tipo2: 0, gestacional: 0 };
+            clics = 0;
+        }
+        
+        function siguienteSintoma(tipo) {
+            conteo[tipo]++;
+            if (clics < sintomasListas.length) {
+                let nuevaLista = sintomasListas[clics];
+                let encuestaDiv = document.getElementById("encuesta");
+                let pregunta = document.getElementById("pregunta");
+                pregunta.innerText = "¿Qué otros síntomas tienes?";
+                encuestaDiv.innerHTML = `<h3 id='pregunta'>¿Qué otros síntomas tienes?</h3>`;
+                nuevaLista.forEach(sintoma => {
+                    encuestaDiv.innerHTML += `<button class='sintoma-btn' onclick='siguienteSintoma("${sintoma.tipo}")'>${sintoma.texto}</button>`;
+                });
+            } else {
+                determinarTipo();
+            }
+            clics++;
+        }
+        
+       
+            // Mostrar el modal con la información sobre el tipo de diabetes
+            showInfo(maxTipo === 'gestacional' ? "Gestacional" : maxTipo === 'tipo1' ? "Tipo 1" : "Tipo 2");
+        
+
+        // Función para mostrar la información en el modal
+        function showInfo(type) {
+            const modal = document.getElementById('info-modal');
+            const typeElem = document.getElementById('diabetes-type');
+            const symptomsElem = document.getElementById('diabetes-symptoms');
+            const recommendationElem = document.getElementById('product-recommendation');
+
+            let symptoms = "";
+            let recommendation = "";
+
+            if (type === "Tipo 1") {
+                symptoms = "Sed excesiva, micción frecuente, pérdida de peso, fatiga.";
+                recommendation = "Te recomendamos nuestro 'Triang-late' porque está hecho a base de cacao en polvo endulzado con stevia, lo que te permite disfrutar del chocolate sin afectar tus niveles de azúcar.";
+            } else if (type === "Tipo 2") {
+                symptoms = "Fatiga, visión borrosa, infecciones frecuentes, sed excesiva.";
+                recommendation = " Te recomendamos nuestro 'Fruti Mix'. Su base de gelatina y frutas naturales, endulzada con stevia, ofrece una opción refrescante y ligera.";
+            } else if (type === "Gestacional") {
+                symptoms = "Sed excesiva, fatiga, micción frecuente.";
+                recommendation = "Prueba 'Baloncito', nuestro helado de vainilla endulzado con stevia. La vainilla es una opción suave para el sistema digestivo.";
+            }
+
+            typeElem.textContent = `Diabetes ${type}`;
+            symptomsElem.textContent = `Síntomas: ${symptoms}`;
+            recommendationElem.textContent = recommendation;
+
+            modal.classList.remove('hidden');
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById('info-modal').classList.add('hidden');
+        }
+    </script>
+
+    <style>
+        .hidden { display: none; }
+        #info-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; }
+        #modal-content { background: white; padding: 20px; border-radius: 8px; text-align: center; }
+    </style>
+</body>
+</html>
+
+
+    <style>
+        .hidden { display: none; }
+        #info-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; }
+        #modal-content { background: white; padding: 20px; border-radius: 8px; text-align: center; }
+    </style>
+</body>
+</html>
+
+
+
+
+            <script src="script.js"></script>
+        </body>
+        </html>
+        <div id="carrito">
+            <h2><i class="fa fa-shopping-cart"></i> Carrito de Compras</h2>
+            <ul id="lista-carrito">
+            </ul>
+            <div id="total">
+                <p>Total: $<span id="total-importe">0.00</span></p>
+            </div>
+        </div>
+        
+       
+        
+        <!DOCTYPE html>
+
+<body>
+    <style> /* Estilos generales del formulario */
+       /* Estilos generales del formulario */
+#formulario-compra {
+    background-color: #fcd4f5; /* Fondo del formulario */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px; /* Mantener en la posición original */
+    font-family: 'Arial', sans-serif;
+    text-align: left; /* Alineación de texto a la izquierda */
+}/* Estilos de las etiquetas */
+#formulario-compra label {
+    display: block;
+    margin: 15px 0 8px;
+    font-weight: bold;
+    color: #ff1493;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+/* Estilos de los campos de texto */
+#formulario-compra input,
+#formulario-compra textarea {
+    width: calc(100% - 20px); /* Ajusta al ancho disponible */
+    padding: 5px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    border: 2px solid #ff69b4;
+    background-color: #fff0f5;
+    font-size: 1em;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+/* Estilos del botón */
+#btn-comprar {
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 10px rgba(255, 105, 180, 0.7);
+}
+
+#btn-comprar:hover {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px rgba(255, 182, 193, 1);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #formulario-compra input,
+    #formulario-compra textarea {
+        width: 100%;
+    }
+
+    #btn-comprar {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+}
+        </style>
+   
+  
+   <div id="formulario-container">
+    <h2></h2>
+    <form id="formulario-compra">
+        <label>👤 Nombre: <input type="text" id="nombre" placeholder="Nombre"></label>
+        <label>📞 Teléfono: <input type="text" id="telefono" placeholder="Teléfono"></label>
+        <label>🏠 Dirección: <input type="text" id="direccion" placeholder="Dirección"></label>
+        <label>🛍️ Productos: <textarea id="productos" placeholder="Confirma aquí el producto y la cantidad"></textarea></label>
+        <button type="button" id="btn-comprar" onclick="descargarFactura()">📄 Guardar y ver factura</button>
+    </form>
+</div>
+
+    <script>
+       function descargarFactura() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Personalizar fuente y colores
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(255, 100, 100);
+
+    // Encabezado bonito
+    doc.setFontSize(20);
+    doc.text(" Comprobante de Pago ", 10, 20);
+    doc.setFontSize(16);
+    doc.text("Bonbonsains ", 10, 30);
+
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "normal");
+
+    let nombre = document.getElementById("nombre").value;
+    let telefono = document.getElementById("telefono").value;
+    let direccion = document.getElementById("direccion").value;
+    let productos = document.getElementById("productos").value;
+
+    // Información del cliente
+    doc.text(" Nombre: " + nombre, 10, 50);
+    doc.text(" Teléfono: " + telefono, 10, 60);
+    doc.text(" Dirección: " + direccion, 10, 70);
+    
+    // Línea separadora
+    doc.setDrawColor(255, 100, 100);
+    doc.line(10, 80, 200, 80);
+
+    // Lista de productos
+    doc.text(" Productos comprados:", 10, 90);
+    doc.text(productos, 10, 100, { maxWidth: 180 });
+
+    // Mensaje de agradecimiento
+    doc.setFontSize(14);
+    doc.setTextColor(255, 105, 180);
+    doc.text("Gracias por tu compra ", 10, 130);
+    doc.text("Nos comunicaremos contigo pronto para la entrega de tu pedido.", 10, 140);
+
+    // Guardar PDF
+    doc.save("factura_bonbonsains.pdf");
+}
+
+    </script>
+
+</body>
+</html>
+
+                         
+            
+            
+         
+</body>
+</html>
+            <div id="contacto">
+                <h2>Contáctanos</h2>
+                <p>Puedes seguirnos en nuestras redes sociales, si necesitas atención al cliente, escríbenos en WhatsApp:</p>
+                <div id="redes-sociales">
+                    <a href="https://wa.me/ +57 314 4910223" target="_blank" class="contacto-icono"><i class="fab fa-whatsapp"></i> WhatsApp   +57 314 4910223 </a>
+                    <a href="https://www.facebook.com/share/A8c4iKbgtGAx3aK8/?mibextid=xfxF2i" target="_blank" class="contacto-icono"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="https://www.tiktok.com/@bonbonsains?_t=8pdl1aXjwHO&_r=1" target="_blank" class="contacto-icono"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://www.instagram.com/sainsbonbon?igsh=aWlrdzZ3eHAxMzhx" target="_blank" class="contacto-icono"><i class="fab fa-instagram"></i> instagram</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Cuadro de recomendación al final de la página -->
+<div id="recomendaciones-cuadro">
+    <p>Si quieres ver recomendaciones de alimentos para tu diabetes e información adicional para una dieta saludable, haz clic aquí.</p>
+    <button onclick="window.location.href='informacion.html'">Ver recomendaciones</button>
+</div>
+
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
