@@ -42,9 +42,17 @@
                 </div>
                 <button class="btn-add" onclick="addToCart('Triang-late', 5.950 )">Agregar al carrito</button>
                 <button class="btn-detalle" onclick="verDetalles('Triang-late')">Ver detalles</button>
-                <p class="detalles" id="detalles-Triang-late" style="display: none;">Características: Este helado esta hecho a base de cacao en polvo endulzado con estevia 
-                    su empaque es triangular 
-                    queriendo imitar el tringulito de chocolate de la marca de bonice</p>
+                <p class="detalles" id="detalles-Triang-late" style="display: none;">Características:
+                🔥 Energía: 340 kcal,
+                🍞 Carbohidratos: 22 g,
+                🍬 Azúcares: 6 g,
+                🍗 Proteínas: 14 g,
+                🥑 Grasas totales: 24 g,
+                🧈 Grasas saturadas: 14 g,
+                🌾 Fibra: 16 g,
+                🧂 Sodio: 60 mg,
+                🦴 Calcio: 120 mg, su empaque es triangular 
+                queriendo imitar el tringulito de chocolate de la marca de bonice</p>
             </div>
 
             <div class="producto">
@@ -58,8 +66,17 @@
                 </div>
                 <button class="btn-add" onclick="addToCart('Baloncito', 3.000)">Agregar al carrito</button>
                 <button class="btn-detalle" onclick="verDetalles('Baloncito')">Ver detalles</button>
-                <p class="detalles" id="detalles-Baloncito" style="display: none;">Características: este helado esta hecho a base de vainilla y se endulza con stevia
-                    su envase es una pelota de futbol de plastico </p>
+                <p class="detalles" id="detalles-Baloncito" style="display: none;">Características:
+                    🔥 Energía: 268 kcal,
+                    🍞 Carbohidratos: 16 g,
+                    🍬 Azúcares: 15 g,
+                    🍗 Proteínas: 10 g,
+                    🥑 Grasas totales: 19 g,
+                    🧈 Grasas saturadas: 11 g,
+                    🌾 Fibra: 0 g,
+                    🧂 Sodio: 105 mg,
+                    🦴 Calcio: 360 mg,
+                    su envase es una pelota de futbol de plastico</p>
             </div>
 
             <div class="producto">
@@ -74,7 +91,16 @@
                 <button class="btn-add" onclick="addToCart('Lengua loca', 3.500)">Agregar al carrito</button>
                 <button class="btn-detalle" onclick="verDetalles('Lengua loca')">Ver detalles</button>
                 <p class="detalles" id="detalles-Lengua-loca" style="display: none;">
-                    Características: Helado hecho a base de gelatina que a medida de su consumo tiene un leve movimiento por la gelatina que contiene.
+                    Características: 
+                    🔥 Energía: ~1 kcal,
+                    🍞 Carbohidratos: 0 g,
+                    🍬 Azúcares: 0 g,
+                    🍗 Proteínas: ~0,4 g,
+                    🥑 Grasas totales: 0 g,
+                    🌾 Fibra: 0 g,
+                    🧂 Sodio: ~0 mg,
+                    🍊 Vitamina C: 250 mg (278% VD*),
+                    que a medida de su consumo tiene un leve movimiento por la gelatina que contiene.
                 </p>
             </div>
             
@@ -91,7 +117,18 @@
                 <button class="btn-add" onclick="addToCart('Fruti mix', 3.600)">Agregar al carrito</button>
                 <button class="btn-detalle" onclick="verDetalles('Fruti mix')">Ver detalles</button>
                 <p class="detalles" id="detalles-Fruti-mix" style="display: none;">
-                    Características: Galletas de avena con stevia y una cubierta de mermelada y maní salado.
+                    Características:
+                    🔥 Energía: 1920 kcal,
+                    🍞 Carbohidratos: 175 g,
+                    🍬 Azúcares: 85 g,
+                    🍗 Proteínas: 78 g,
+                    🥑 Grasas totales: 110 g,
+                    🧈 Grasas saturadas: 62 g,
+                    🌾 Fibra: 33 g,
+                    🧂 Sodio: 600 mg,
+                    🦴 Calcio: 1200 mg,
+                    🩸 Hierro: 13 mg,
+                    con cubirta de una cubierta de mermelada y maní salado.
                 </p>
             </div>
             
@@ -205,13 +242,13 @@
 
             if (type === "Tipo 1") {
                 symptoms = "Sed excesiva, micción frecuente, pérdida de peso, fatiga.";
-                recommendation = "Te recomendamos nuestro 'Triang-late' porque está hecho a base de cacao en polvo endulzado con stevia, lo que te permite disfrutar del chocolate sin afectar tus niveles de azúcar.";
+                recommendation = "Te recomendamos nuestro 'Triang-late' porque está hecho a base de cacao en polvo endulzado con stevia, lo que te permite disfrutar del chocolate sin afectar tus niveles de azúcar. Además, su formato triangular es práctico y divertido.";
             } else if (type === "Tipo 2") {
                 symptoms = "Fatiga, visión borrosa, infecciones frecuentes, sed excesiva.";
-                recommendation = " Te recomendamos nuestro 'Fruti Mix'. Su base de gelatina y frutas naturales, endulzada con stevia, ofrece una opción refrescante y ligera.";
+                recommendation = "Prueba 'Fruti mix', ideal para disfrutar saludablemente.";
             } else if (type === "Gestacional") {
                 symptoms = "Sed excesiva, fatiga, micción frecuente.";
-                recommendation = "Prueba 'Baloncito', nuestro helado de vainilla endulzado con stevia. La vainilla es una opción suave para el sistema digestivo.";
+                recommendation = "Prueba 'Baloncito', nuestro helado de vainilla endulzado con stevia. La vainilla es una opción suave para el sistema digestivo y su presentación en un envase de pelota de fútbol lo hace fácil de consumir en cualquier momento.";
             }
 
             typeElem.textContent = `Diabetes ${type}`;
@@ -393,7 +430,13 @@
 </body>
 </html>
 
-                         
+            <!-- Nuevo campo de confirmación de productos -->
+
+        
+
+
+            
+                
             
             
          

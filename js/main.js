@@ -130,11 +130,11 @@ function determinarTipo() {
     // Recomendación de productos
     let recomendacion = "";
     if (tipoDiabetes === "Tipo 1") {
-        recomendacion =  "Te recomendamos nuestro 'Triang-late' porque está hecho a base de cacao en polvo endulzado con stevia, lo que te permite disfrutar del chocolate sin afectar tus niveles de azúcar.";
+        recomendacion = "Te recomendamos nuestro 'Triang-late', perfecto para antojos sin azúcar.";
     } else if (tipoDiabetes === "Tipo 2") {
-        recomendacion = " Te recomendamos nuestro 'Fruti Mix'. Su base de gelatina y frutas naturales, endulzada con stevia, ofrece una opción refrescante y ligera.";
+        recomendacion = "Prueba 'Fruti mix', ideal para disfrutar saludablemente.";
     } else if (tipoDiabetes === "Gestacional") {
-        recomendacion = "Prueba 'Baloncito', nuestro helado de vainilla endulzado con stevia. La vainilla es una opción suave para el sistema digestivo.";
+        recomendacion = "Te sugerimos 'Baloncito', una opción ligera y sin azúcar.";
     }
 
     // Mostrar la recomendación
