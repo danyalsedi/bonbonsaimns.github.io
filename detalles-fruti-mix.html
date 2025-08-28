@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fruti Mix</title>
+  <!-- Preload de la imagen de la tabla para evitar parpadeos -->
+  <link rel="preload" as="image" href="img/fruti-mix-tabla.PNG" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 50px auto;
+      background: #fff8f9;
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      color: #e94e77;
+      text-shadow: 2px 2px #ffd6e0;
+      margin: 0 0 10px 0;
+    }
+
+    /* Chispitas animadas */
+    .sparkles {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .sparkles span {
+      position: absolute;
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff6f91, #ff9671);
+      animation: float 6s linear infinite;
+    }
+    .sparkles span:nth-child(2) { background: radial-gradient(circle, #ffde7d, #ffb26b); left: 20%; animation-delay: 1s; }
+    .sparkles span:nth-child(3) { background: radial-gradient(circle, #c6ffdd, #7ed6df); left: 40%; animation-delay: 2s; }
+    .sparkles span:nth-child(4) { background: radial-gradient(circle, #a8edea, #fed6e3); left: 60%; animation-delay: 3s; }
+    .sparkles span:nth-child(5) { background: radial-gradient(circle, #fbc2eb, #a6c1ee); left: 80%; animation-delay: 4s; }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    .image-container {
+      position: relative;
+      margin: 25px 0;
+      display: inline-block;
+    }
+
+    .image-container img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      transition: opacity 0.5s ease-in-out, transform 0.3s ease;
+      display: block;
+    }
+    .image-container img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Flecha mejorada */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      right: -55px;
+      transform: translateY(-50%);
+      background: #ff6f91;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 58px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+      
+    }
+    /* Giro controlado por clase, así el hover no rompe la rotación */
+    .arrow.rotated { transform: translateY(-50%) rotate(180deg); }
+    .arrow:hover { transform: translateY(-50%) scale(1.1); }
+    .arrow.rotated:hover { transform: translateY(-50%) rotate(180deg) scale(1.1); }
+    .arrow:active { box-shadow: 0 3px 12px rgba(0,0,0,0.35); }
+
+    .story {
+      margin: 25px 0 5px 0;
+      font-size: 1.15rem;
+      color: #6a3f2b;
+      line-height: 1.7;
+      background: #fff1f3;
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: inset 0 5px 12px rgba(0,0,0,0.06);
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 14px 30px;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #ff9671, #ff6f91);
+      transform: scale(1.05);
+    }
+
+    /* Lluvia de galletas */
+    .cookie-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .cookie {
+      position: fixed;
+      font-size: 24px;
+      animation: fall linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes fall {
+      0% {
+          transform: translateY(-100vh) rotate(0deg);
+      }
+      100% {
+          transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sparkles">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <h1>Fruti Mix 🍪🍓🍇</h1>
+
+    <div class="image-container">
+      <!-- Imagen principal -->
+      <img id="productImage" src="img/Fruti mix.PNG" alt="Fruti Mix" />
+      <!-- Flecha (ahora controlada por clase .rotated) -->
+      <button id="arrowBtn" class="arrow" type="button" aria-label="Cambiar a tabla nutricional">➜</button>
+    </div>
+
+    <div class="story">
+      <p>
+        Fruti Mix es una explosión de sabor con frutas deliciosas 🌸✨.  
+        Cada mordisco está lleno de alegría, dulzura y ese toque natural que lo hace único.  
+        ¡La combinación perfecta para endulzar tu día!
+      </p>
+    </div>
+
+    <a href="index.html" class="btn">Volver a la tienda</a>
+  </div>
+
+  <!-- Agregar antes de cerrar el body -->
+  <div class="cookie-rain" id="cookieContainer"></div>
+
+  <script>
+    // Preload para garantizar transición sin “desaparecer”
+    const preload = new Image();
+    preload.src = "img/fruti-mix-tabla.PNG";
+
+    const img = document.getElementById("productImage");
+    const arrow = document.getElementById("arrowBtn");
+    let showingNutrition = false;
+
+    arrow.addEventListener("click", () => {
+      showingNutrition = !showingNutrition;
+      // Cambia imagen
+      img.src = showingNutrition ? "img/fruti-mix-tabla.PNG" : "img/Fruti mix.PNG";
+      // Alterna giro con clase (el hover ya no lo rompe)
+      arrow.classList.toggle("rotated", showingNutrition);
+      // Accesibilidad: cambia etiqueta
+      arrow.setAttribute(
+        "aria-label",
+        showingNutrition ? "Volver a imagen del producto" : "Cambiar a tabla nutricional"
+      );
+    });
+
+    function createCookie() {
+        const container = document.getElementById('cookieContainer');
+        const cookie = document.createElement('div');
+        cookie.className = 'cookie';
+        cookie.textContent = '🍪';
+        
+        cookie.style.left = Math.random() * 100 + 'vw';
+        const duration = Math.random() * 8 + 4;
+        cookie.style.animation = `fall ${duration}s linear infinite`;
+        
+        container.appendChild(cookie);
+        
+        setTimeout(() => {
+            cookie.remove();
+        }, duration * 1000);
+    }
+
+    // Crear galletas iniciales
+    document.addEventListener('DOMContentLoaded', () => {
+        for(let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                createCookie();
+            }, Math.random() * 3000);
+        }
+
+        // Continuar creando galletas
+        setInterval(createCookie, 1000);
+    });
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triang-late - Detalles</title>
+    <style>
+        /* Fuente y colores chocolate */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to bottom, #4b2e2e, #7b4a2b, #d1a171);
+            color: #fff8f0;
+            text-align: center;
+        }
+
+        header {
+            padding: 30px;
+            background: #3b1f1f;
+            border-bottom: 5px solid #d1a171;
+        }
+
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            color: #f5d6b0;
+            text-shadow: 3px 3px #2a1a1a;
+            margin: 0;
+        }
+
+        .producto {
+            margin: 40px auto;
+            max-width: 600px; /* Reducido de 800px */
+            background: rgba(59, 31, 31, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.6);
+        }
+
+        .producto img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            border: 4px solid #f5d6b0;
+        }
+
+        .galeria {
+            margin: 20px auto;
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Reducido de 600px */
+        }
+
+        .galeria img {
+            display: none;
+            width: 100%;
+            max-width: 350px; /* Reducido de 500px */
+            height: auto;
+            border-radius: 15px;
+            border: 4px solid #f5d6b0;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+        .galeria img.active {
+            display: block;
+        }
+
+        .flecha {
+            background: #d1a171;
+            border: none;
+            font-size: 2rem;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #3b1f1f;
+            margin-top: 15px;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .flecha:hover {
+            transform: scale(1.1);
+            background: #f5d6b0;
+        }
+
+        .historia {
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(241, 210, 160, 0.85);
+            color: #3b1f1f;
+            border-radius: 20px;
+            max-width: 600px; /* Reducido de 800px */
+            font-size: 1.1rem; /* Reducido de 1.2rem */
+            line-height: 1.6;
+        }
+
+        .volver {
+            margin: 40px;
+        }
+
+        .volver a {
+            background: #f5d6b0;
+            color: #3b1f1f;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+            transition: background 0.3s;
+        }
+
+        .volver a:hover {
+            background: #d1a171;
+        }
+
+        /* Animación de chocolates cayendo */
+        .chocolate-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .chocolate {
+            position: fixed;
+            font-size: 24px;
+            animation: fall linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍫 Triang-late 🍫</h1>
+    </header>
+
+    <section class="producto">
+        <h2>El chocolate en forma de triángulo que endulza tu mundo</h2>
+        <div class="galeria">
+            <img src="img/Triang-late.jpeg" alt="Triang-late" class="active">
+            <img src="img/tabla-nutricional-triang-late.jpg"alt="Tabla nutricional">
+        </div>
+        <button class="flecha" onclick="cambiarImagen()">➡️</button>
+    </section>
+
+    <section class="historia">
+        <h2>La historia de Triang-late</h2>
+        <p>
+            Triang-late nació inspirado en uno de esos clásicos que marcaron la infancia de muchos el famoso Triangulito de Bon Ice.
+             Ese heladito con forma triangular que era simple pero inolvidable, y que con los años desapareció del mercado,
+              dejando un vacío en quienes crecimos disfrutándolo. 
+        </p>
+        <p>
+           Hoy, nosotros lo traemos de vuelta con un giro especial ✨. 
+           Hemos creado Triang-late como un homenaje a ese recuerdo, pero en una versión
+            más consciente y saludable: sin azúcar añadida, endulzado de manera natural y pensado para todo tipo de personas.
+    </section>
+
+    <div class="volver">
+        <a href="index.html">⬅️ Volver a la tienda</a>
+    </div>
+
+    <!-- Agregar justo después del <body> -->
+    <div class="chocolate-rain" id="chocolateContainer"></div>
+
+    <script>
+        let indice = 0;
+        const cambiarImagen = () => {
+            const imagenes = document.querySelectorAll(".galeria img");
+            imagenes[indice].classList.remove("active");
+            indice = (indice + 1) % imagenes.length;
+            imagenes[indice].classList.add("active");
+            actualizarFlecha();
+        }
+
+        const actualizarFlecha = () => {
+            const flecha = document.querySelector(".flecha");
+            flecha.textContent = indice === 1 ? "⬅️" : "➡️";
+        }
+
+        // Volver a la imagen inicial
+        const volverImagenInicial = () => {
+            const imagenes = document.querySelectorAll(".galeria img");
+            imagenes[indice].classList.remove("active");
+            indice = 0;
+            imagenes[indice].classList.add("active");
+            actualizarFlecha();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const flecha = document.querySelector(".flecha");
+            
+            flecha.addEventListener('mouseenter', () => {
+                const imagenes = document.querySelectorAll(".galeria img");
+                imagenes[indice].classList.remove("active");
+                indice = (indice + 1) % imagenes.length;
+                imagenes[indice].classList.add("active");
+                actualizarFlecha();
+            });
+
+            flecha.addEventListener('mouseleave', () => {
+                volverImagenInicial();
+            });
+
+            // Verificar carga de imágenes
+            const imagenes = document.querySelectorAll(".galeria img");
+            imagenes.forEach((img, index) => {
+                img.onerror = function() {
+                    console.error(`Error cargando imagen ${index + 1}:`, img.src);
+                };
+                img.onload = function() {
+                    console.log(`Imagen ${index + 1} cargada correctamente:`, img.src);
+                };
+            });
+        });
+
+        // Animación de chocolates
+        function createChocolate() {
+            const container = document.getElementById('chocolateContainer');
+            const chocolate = document.createElement('div');
+            chocolate.className = 'chocolate';
+            chocolate.textContent = '🍫';
+            
+            // Posición aleatoria en X
+            chocolate.style.left = Math.random() * 100 + 'vw';
+            
+            // Duración y retraso aleatorio
+            const duration = Math.random() * 8 + 4; // 4-12 segundos (más rápido)
+            chocolate.style.animation = `fall ${duration}s linear infinite`;
+            
+            container.appendChild(chocolate);
+            
+            setTimeout(() => {
+                chocolate.remove();
+            }, duration * 1000);
+        }
+
+        // Crear más chocolates iniciales
+        for(let i = 0; i < 30; i++) { // Aumentado de 20 a 30
+            setTimeout(() => {
+                createChocolate();
+            }, Math.random() * 3000); // Retraso inicial reducido a 3 segundos
+        }
+
+        // Crear nuevos chocolates más frecuentemente
+        setInterval(createChocolate, 1000); // Reducido de 2000ms a 1000ms (cada segundo)
+    </script>
+</body>
+</html>
+

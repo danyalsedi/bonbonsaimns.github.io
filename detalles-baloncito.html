@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baloncito - Detalles</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap');
+        
+        /* Animación de helados de vainilla cayendo */
+        .ice-cream-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            -webkit-user-select: none;
+            user-select: none;
+            z-index: 0; /* Más al fondo */
+        }
+        .ice-cream {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0; /* Detrás del contenido */
+            width: 18px;
+            height: 32px;
+            opacity: 0.23; /* Más sutil */
+            animation: falling linear infinite;
+            /* sin border-radius ni background */
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translateY(-5vh) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg) scale(1);
+            }
+        }
+        body {
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            background-color: #fff5f8;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #3b2f2f;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            padding: 30px;
+            background: linear-gradient(135deg, #ff85a2, #ff9ebd);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.3);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+            background-size: 30px 30px;
+            animation: slide 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes slide {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 2px 2px rgba(0,0,0,0.1);
+            margin: 0;
+            position: relative;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .producto {
+            margin: 40px auto;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0px 15px 30px rgba(255, 182, 193, 0.4);
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideUp 0.5s ease forwards;
+        }
+        
+        .producto:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 20px 40px rgba(255, 182, 193, 0.6);
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .galeria img { display: none; }
+        .galeria img.active { 
+            display: block; 
+            margin: 0 auto; 
+            width: 300px; 
+            border-radius: 15px; 
+            border: none;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .flecha {
+            background: linear-gradient(45deg, #ff85a2, #ff9ebd);
+            border: none;
+            font-size: 2rem;
+            padding: 15px 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            margin-top: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .flecha:hover { 
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 133, 162, 0.4);
+            background: linear-gradient(45deg, #ff9ebd, #ff85a2);
+        }
+        .flecha:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(255, 133, 162, 0.3);
+        }
+        .historia {
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff, #fff5f8);
+            border: none;
+            border-radius: 20px;
+            max-width: 800px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .historia::before {
+            content: '🍦';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.03;
+            top: -20px;
+            right: -20px;
+            transform: rotate(45deg);
+        }
+
+        .historia::after {
+            content: '❄️';
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.03;
+            bottom: -10px;
+            left: -10px;
+            transform: rotate(-45deg);
+        }
+        
+        .historia:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .volver { margin: 40px; }
+        .volver a {
+            background: linear-gradient(45deg, #ff85a2, #ff9ebd);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .volver a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 133, 162, 0.4);
+            background: linear-gradient(45deg, #ff9ebd, #ff85a2);
+        }
+        .volver a:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(255, 133, 162, 0.3);
+        }
+        .ice-cream-cone {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 22px;
+            background: linear-gradient(135deg, #f7c873 70%, #e2a94f 100%);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            box-shadow: 0 2px 6px rgba(230, 180, 80, 0.2);
+        }
+        .ice-cream-scoop {
+            position: absolute;
+            left: 50%;
+            bottom: 16px;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle at 60% 40%, #fffbe7 70%, #f7e7b7 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(255, 245, 200, 0.4);
+            border: 2px solid #f7e7b7;
+        }
+    </style>
+</head>
+<body>
+    <div class="ice-cream-bg"></div>
+    <header>
+        <h1>🍦 Baloncito 🍦</h1>
+    </header>
+
+    <section class="producto">
+        <h2>El helado blanco en forma de bola que refresca tu día</h2>
+        <div class="galeria">
+            <img src="img/Baloncito.PNG" alt="Baloncito" class="active">
+            <img src="img/baloncito-nutricional.jpeg" alt="Tabla nutricional">
+        </div>
+        <button class="flecha" onclick="cambiarImagen(this)">➡️</button>
+    </section>
+
+    <section class="historia">
+        <h2>La historia de Baloncito</h2>
+        <p>Super Baloncito nació con la idea de unir familias en torno a un helado. 
+            Inspirado en la diversión de los juegos y la alegría de compartir, su empaque invita a pasar
+             un buen rato mientras disfrutas de un postre delicioso, cremoso y saludable. Su receta es apta para 
+             todo tipo de personas, incluso diabéticos, porque creemos que la diversión
+             y el sabor deben ser para todos🍦.</p>
+    </section>
+    <p></p>
+
+    <div class="volver">
+        <a href="index.html">⬅️ Volver a la tienda</a>
+    </div>
+
+    <script>
+        let indice = 0;
+        const cambiarImagen = () => {
+            const imagenes = document.querySelectorAll(".galeria img");
+            imagenes[indice].classList.remove("active");
+            indice = (indice + 1) % imagenes.length;
+            imagenes[indice].classList.add("active");
+            actualizarFlecha();
+        }
+
+        const actualizarFlecha = () => {
+            const flecha = document.querySelector(".flecha");
+            flecha.textContent = indice === 1 ? "⬅️" : "➡️";
+        }
+
+        // Volver a la imagen inicial
+        const volverImagenInicial = () => {
+            const imagenes = document.querySelectorAll(".galeria img");
+            imagenes[indice].classList.remove("active");
+            indice = 0; // Volver a la primera imagen
+            imagenes[indice].classList.add("active");
+            actualizarFlecha();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const flecha = document.querySelector(".flecha");
+            
+            // Evento cuando el cursor entra al botón
+            flecha.addEventListener('mouseenter', () => {
+                const imagenes = document.querySelectorAll(".galeria img");
+                imagenes[indice].classList.remove("active");
+                indice = (indice + 1) % imagenes.length;
+                imagenes[indice].classList.add("active");
+                actualizarFlecha();
+            });
+
+            // Evento cuando el cursor sale del botón
+            flecha.addEventListener('mouseleave', () => {
+                volverImagenInicial();
+            });
+
+            // Verificar carga de imágenes
+            const imagenes = document.querySelectorAll(".galeria img");
+            imagenes.forEach((img, index) => {
+                img.onerror = function() {
+                    console.error(`Error cargando imagen ${index + 1}:`, img.src);
+                };
+                img.onload = function() {
+                    console.log(`Imagen ${index + 1} cargada correctamente:`, img.src);
+                };
+            });
+
+            // Usar el contenedor para los helados
+            const bg = document.querySelector('.ice-cream-bg');
+
+            function createIceCream() {
+                const iceCream = document.createElement('div');
+                iceCream.className = 'ice-cream';
+
+                // Tamaño aleatorio más pequeño y sutil
+                const scale = Math.random() * 0.3 + 0.5; // entre 0.5 y 0.8
+                iceCream.style.width = (18 * scale) + 'px';
+                iceCream.style.height = (32 * scale) + 'px';
+
+                // Posición aleatoria
+                const leftPosition = Math.random() * 100;
+                iceCream.style.left = leftPosition + 'vw';
+                iceCream.style.top = '-40px';
+
+                // Velocidad aleatoria
+                const duration = Math.random() * 3 + 4; // entre 4 y 7 segundos
+                iceCream.style.animationDuration = duration + 's';
+
+                // Crear bola de vainilla
+                const scoop = document.createElement('div');
+                scoop.className = 'ice-cream-scoop';
+                scoop.style.width = (14 * scale) + 'px';
+                scoop.style.height = (14 * scale) + 'px';
+                scoop.style.bottom = (10 * scale) + 'px';
+                scoop.style.borderWidth = (1.2 * scale) + 'px';
+
+                // Crear cono
+                const cone = document.createElement('div');
+                cone.className = 'ice-cream-cone';
+                cone.style.width = (10 * scale) + 'px';
+                cone.style.height = (14 * scale) + 'px';
+
+                iceCream.appendChild(scoop);
+                iceCream.appendChild(cone);
+
+                bg.appendChild(iceCream);
+
+                // Eliminar después de la animación
+                setTimeout(() => {
+                    iceCream.remove();
+                }, duration * 1000);
+            }
+
+            // Crear helados cada 500ms
+            setInterval(createIceCream, 500);
+
+            // Crear helados iniciales
+            for(let i = 0; i < 15; i++) {
+                setTimeout(createIceCream, i * 200);
+            }
+        });
+    </script>
+</body>
+</html>
